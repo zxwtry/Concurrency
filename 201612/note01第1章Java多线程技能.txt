@@ -1,0 +1,28 @@
+01: 主要关注启动，暂停，停止，优先级，线程安全。
+
+02: 进程：操作系统结构的基础；程序+数据；操作系统进行资源调度的基本单位。
+    线程：进程中相对独立运行的子任务。一个进程在运行，至少一个线程在运行。
+
+03: Thread.java的start方法：通知 "进程规划器"，此进程已经准备就绪。
+                            异步开启新线程执行。
+    Thread.java的run方法：调用一个对象的一个方法。
+                          在原线程中执行run方法。
+
+04: Thread实现Runnable接口，故Thread t2 = new Thread(t1);是可行的。
+
+05: 终止正在运行的线程：
+        a,  使用退出标志，run方法执行完后，线程正常终止。
+        b,  interrupt方法，run方法加上判断，线程正常终止。
+        c,  stop不推荐。
+
+06: Thread.java中的几个方法：
+        public static boolean interrupted(){
+            return currentThread().isInterrupted(true);
+        }
+        public boolean isInterrupted(){
+            return isInterrupted(false);
+        }
+        private native boolean isInterrupted(boolean ClearInterrupted);
+        public final native boolean isAlive();
+
+07: 
