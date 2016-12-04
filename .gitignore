@@ -1,1 +1,7 @@
-/bin/
+*.class
+*.pyc
+*.pyo
+*.jar
+*.zip
+*.data
+*.exe
