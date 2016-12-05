@@ -24,11 +24,21 @@
         }
         private native boolean isInterrupted(boolean ClearInterrupted);
         public final native boolean isAlive();
+        public static native void sleep(long millis) throws InterruptedException;
 
 07: interrupted的使用：Thread.interrutped()
         如果t1.interrupted()，记得这是在实例中调用静态方法。
-    isInterrupted的使用：t1.isInterrupted()
+    isInterrupted的使用：t1.isInterrupted() 或 Thread.currentThread().isInterrupted()
 
 08: interrupt对信号置true
     interrupted对信号置false。
     isInterrupted只是返回信号。
+    sleep会对信号置false
+
+09: stop, suspend, resume隐藏的问题，用由抛异常展现。
+
+10: yield方法：public static native void yield();
+    自愿放弃当前CPU资源，线程规划器可以又把CPU给这个线程。
+    在调试和测试中，用来重现一些并发bug。
+
+11: 
