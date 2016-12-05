@@ -41,4 +41,14 @@
     自愿放弃当前CPU资源，线程规划器可以又把CPU给这个线程。
     在调试和测试中，用来重现一些并发bug。
 
-11: 
+11: 线程优先级
+    1,  [1~10]
+        MIN_PRIORITY=1
+        NORM_PRIORITY=5
+        MAX_PRIORITY=10
+    2,  线程B被线程A启动，
+        线程B start时候，线程A的priority就是线程B的初始priority。
+
+12: Java线程可分为：用户线程和守护线程。
+    当JVM中只存在守护线程时，JVM会退出。
+    t.setDaemon();必须在t.start();前设置好。
