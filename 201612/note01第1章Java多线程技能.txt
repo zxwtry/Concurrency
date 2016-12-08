@@ -53,4 +53,17 @@
     当JVM中只存在守护线程时，JVM会退出。
     t.setDaemon();必须在t.start();前设置好。
 
+13: 知识点：
+    1,  synchronized对象监视器为Object时的使用
+    2,  synchronized对象监视器为Class时的使用
+    3,  非线程安全是如何出现的
+    4,  关键字volatile的主要作用
+    5,  关键字volatile与synchronized的区别及使用情况
 
+14: synchronized
+    1,  方法内部定义的变量，不存在"非线程安全"问题。
+    2,  对实例变量，只读取不修改，不存在"非线程安全"问题。
+    3,  synchronized加在方法上是对象锁。
+    4,  只有共享资源才有同步的必要。
+    5,  一个对象的同步方法锁给出，对非同步方法没有影响。
+    6,  
