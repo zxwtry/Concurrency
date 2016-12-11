@@ -71,4 +71,8 @@
     8,  出现异常，锁自动释放。
     9,  子类重写父类同步方法，如果没有synchronized，则不再同步。
 
+15: synchronized同步块
+    1,  同步块在非静态方法中，synchronized(this){} 和 synchronized(o){}
+    2,  同步块的静态方法中，synchronized(o){}
+    3,  同步块的意义：对方法中部分代码加上synchronized，进行同步。
 
