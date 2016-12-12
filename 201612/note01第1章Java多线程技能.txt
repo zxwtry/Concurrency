@@ -60,7 +60,7 @@
     4,  关键字volatile的主要作用
     5,  关键字volatile与synchronized的区别及使用情况
 
-14: synchronized
+14: synchronized加在非静态方法上
     1,  方法内部定义的变量，不存在"非线程安全"问题。
     2,  对实例变量，只读取不修改，不存在"非线程安全"问题。
     3,  synchronized加在方法上是对象锁。
@@ -75,4 +75,24 @@
     1,  同步块在非静态方法中，synchronized(this){} 和 synchronized(o){}
     2,  同步块的静态方法中，synchronized(o){}
     3,  同步块的意义：对方法中部分代码加上synchronized，进行同步。
+
+16: synchronized使用class锁
+    1,  形式一：在静态方法上加synchronized
+    2,  形式二：synchronized(类名.class) {}
+    3,  在同一个类中，1和2使用的是同一个锁
+    4,  类名.class和其它对象锁(包含this)，不是一个锁。
+
+17, synchronized锁加在对象上的注意点：
+    1,  String的常量池
+        String.valueOf()    //除了true和false，都是新建对象
+    2,  Long的[-128, 127]的缓存
+        Long.valueOf()      //[-128,127]就进入缓存
+    3,  Integer的[-128, 127]的缓存
+        Integer.valueOf()   //[-128,127]就进入缓存
+    4,  Short的[-128, 127]的缓存
+        Short.valueOf()     //[-128,127]就进入缓存
+    5,  Character的[0, 127]的缓存
+        Character.valueOf() //[0,127]就进入缓存
+    6,  Float和Double没有缓存。 
+
 
