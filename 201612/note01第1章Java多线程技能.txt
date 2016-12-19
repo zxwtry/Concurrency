@@ -95,4 +95,4 @@
         Character.valueOf() //[0,127]就进入缓存
     6,  Float和Double没有缓存。 
 
-
+18, 
