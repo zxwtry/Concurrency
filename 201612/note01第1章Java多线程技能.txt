@@ -95,4 +95,25 @@
         Character.valueOf() //[0,127]就进入缓存
     6,  Float和Double没有缓存。 
 
-18, 
+18, 锁对象更改，每个线程加的锁是运行到synchronized时的锁对象。
+    锁对象没有更改，锁对象中的属性更改，还是同一个锁。
+
+19, volatile关键字
+    1,  volatile的主要作用：让变量在多线程间可见。
+    2,  volatile不支持原子性。
+    3,  volatile是线程同步的轻量级实现。
+        volatile性能好于synchronized。
+        volatile修饰变量，synchronized修饰方法和代码块。
+        实际中，synchronized使用较多。
+    4,  多线程访问volatile不会发生阻塞。
+        多线程访问synchronized会发生阻塞。
+    5,  volatile保证数据的可见性，不保证原子性。
+        synchronized保证原子性，间接保证可见性。
+    6,  synchronized具有将线程工作内存中的私有变量与
+        公共内存中的变量同步的功能。就是可见性。
+
+20, 在java中，下列操作是原子操作：
+    all assignments of primitive types except for long and double
+    all assignments of references
+    all operations of java.concurrent.Atomic* classes
+    all assignments to volatile longs and doubles
