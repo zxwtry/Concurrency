@@ -27,6 +27,11 @@ public class Code04_volatile_不具有原子性 {
         for (int i = 0; i < mt.length; i ++) {
             mt[i].start();
         }
+        try {
+            Thread.sleep(3000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         System.out.println(MyThread.count);
     }
 }
