@@ -1,0 +1,20 @@
+01, 应该掌握的技术点
+    1,  使用wait/notify实现线程间的通信
+    2,  生产者/消费者模式的实现
+    3,  方法join的使用
+    4,  ThreadLocal类的使用
+
+02, wait()方法
+    1,  方法wait()的作用：使执行当前代码的线程等待。
+        wait()是Object类的方法。
+        wait()将当前线程置入"预执行队列"中。
+        当前线程在wait()处停止执行，直到接到通知或被中断为止。
+    2,  调用wait()之前，线程必须获取该对象的对象级锁，
+        即只能在同步方法或同步块中调用wait()方法。
+        执行wait()方法后，当前线程释放锁。
+        在从wait()返回前，线程与其它线程竞争重新获得锁。
+    3,  如果调用wait()时，没有持有适当的锁，
+        则抛出IllegalMonitorStateException，
+        它是RuntimeException的一个子类，
+        不需要try-catch
+
