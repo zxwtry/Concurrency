@@ -117,4 +117,10 @@
     4,  方法join具有使线程排队运行的作用，有些类似同步的运行效果。
         join方法内部使用wait()方法进行等待。
         synchronized关键字使用的是"对象监视器"原理做同步。
-
+    5,  在b线程中：a.start(); a.join();
+        在c线程中：b.interrupt()
+        当b线程处于等待a结束时，b.interrutp()和b.join()会出现异常。
+        这时，b线程停止，a线程仍在运行，c线程仍在运行。
+    6,  join(long): 在b线程中，a.join(100); b的对象锁会释放。
+        sleep(long): 在b线程中，Thread.sleep(100); b的对象锁不会释放。
+    
