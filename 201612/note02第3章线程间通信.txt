@@ -139,4 +139,19 @@
         b,  protected T initialValue(): 返回此线程局部变量的当前线程的"初始值"
         c,  void remove(): 移除此线程局部变量当前线程的值(会调用initialValue())
         d,  void set(T value): 将此线程局部变量的当前线程副本中值设置为指定值
-    
+    5,  ThreadLocal<String> tl = new ThreadLocal<String>();
+        这样tl是不能调用initialValue()方法的。
+        要想使用initialValue()方法，只需要实现一个MTL extends ThreadLocal
+        然后重写initialValue()方法就行了。
+        这样的代码ThreadLocal<String> tl = new MTL<String>();
+        这样tl.get()返回的就是自己实现的初始值。
+
+13, 类InheritableThreadLocal<T> extends ThreadLocal<T>
+    1,  在创建子线程时，子线程会接收所有可继承的线程局部变量的初始值，
+        以获得父线程所具有的值。通常，子线程的值与父线程的值是一致的；
+        但是，通过重写这个类中的childValue方法，子线程的值可以作为父线程值的一个任意函数。
+        当必须将变量(如用户ID和事务ID)中维护的每一个线程属性(per-thread-attribute)
+        自动传送给创建的所有子线程时，应尽可能地采用可继承的线程局部变量，而不是采用普通的线程局部变量。
+    2,  这个方法中，只有一个protected和public方法：protected T childValue(T parentValue);
+        当创建子线程时，计算这个可继承线程局部线程的子线程的初始值，将该值作为父线程值的一个函数。
+        在启动子线程之前，从父线程内部调用此方法。该方法仅返回其输入变量，如果所需要的是其它行为，则应该重写此方法。
