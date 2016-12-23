@@ -124,3 +124,19 @@
     6,  join(long): 在b线程中，a.join(100); b的对象锁会释放。
         sleep(long): 在b线程中，Thread.sleep(100); b的对象锁不会释放。
     
+12, 类ThreadLocal的使用
+    1,  变量值的共享可以使用public static变量形式，
+        所有的线程都使用同一个public static变量。
+        如果想实现每一个线程都有自己的共享变量该如何解决？
+        JDK提供的类ThreadLocal正是为了解决这样的问题。
+    2,  类ThreadLocal主要解决的是每个线程绑定自己的值，
+        可以将ThreadLocal类比喻成全局存放数据的盒子，
+        盒子中可以存储每个线程的私有数据。
+    3,  ThreadLocal实例通常是类中的private static字段，
+        希望将状态与某一个线程(如，事务ID或用户ID)相关联。
+    4,  ThreadLocal有四个方法：
+        a,  T get():  返回此线程局部变量的当前线程副本中的值。
+        b,  protected T initialValue(): 返回此线程局部变量的当前线程的"初始值"
+        c,  void remove(): 移除此线程局部变量当前线程的值(会调用initialValue())
+        d,  void set(T value): 将此线程局部变量的当前线程副本中值设置为指定值
+    
