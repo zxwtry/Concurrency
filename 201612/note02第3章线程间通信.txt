@@ -155,3 +155,53 @@
     2,  这个方法中，只有一个protected和public方法：protected T childValue(T parentValue);
         当创建子线程时，计算这个可继承线程局部线程的子线程的初始值，将该值作为父线程值的一个函数。
         在启动子线程之前，从父线程内部调用此方法。该方法仅返回其输入变量，如果所需要的是其它行为，则应该重写此方法。
+
+14, ReentrantLock类
+    1,  在Java多线程中，可以使用synchronized关键字来实现线程之间同步互斥。
+        JDK1.5新增加的ReentrantLock能达到同样的效果，扩展功能更加强大，
+        比如具有嗅探锁定、多路分支通知等功能，而且在使用上也比synchronized更加灵活。
+    2,  关键字synchronized与wait()和notify()/notifyAll()方法相结合可以实现等待/通知模式。
+        类ReentrantLock与Condition对象同样可以实现等待/通知模式，还可以实现多路通知功能：
+            a,  一个Lock对象里面可以创建多个Condition实例
+            b,  线程对象可以注册在指定的Condition中
+            c,  可以有选择地进行线程通知，在调度线程上更加灵活。(notify()由JVM随机选择)
+    3,  synchronized相当于整个Lock对象只有一个单一的Condition对象，所有的线程都
+        注册在它一个对象的身上。线程开始notifyAll()时，需要通知所有的WAITING线程，
+        没有选择权，会出现相当大的效率问题。
+    4,  Object类的wait()方法相当于Condition类中的await()方法。
+        Object类的wait(long timeout)方法相当于Condition类中的await(long time, TimeUnit unit)方法。
+        Object类的notify()方法相当于Condition类中的signal()方法。
+        Object类的notifyAll()方法相当于Condition类中的signalAll()方法。
+    5,  使用样式是：
+        private Lock l = new ReentrantLock();
+        public Condition ca = l.newCondition();
+        public Condition cb = l.newCondition();
+        public void awaitDemo() {
+            try {
+                l.lock();
+                System.out.println(".....");
+                ca.await();
+                System.out.println("#####");
+            } catch(InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                l.unlock();
+            }
+        }
+        public void signalAllDemo() {
+            try {
+                l.lock();
+                ca.signalAll();
+                //ca.signal();在用法上一样，功能上不同。
+            } finally {
+                l.unlock();
+            }
+        }
+
+15, Lock公平锁和非公平锁
+    1,  锁Lock分为"公平锁"和"非公平锁"。
+        "公平锁"：  线程获取锁的顺序是按照线程加在的顺序来分配的。
+                    即先到先得的FIFO顺序。
+        "非公平锁"：获取锁的抢占机制，是随机获得锁，先来的不一定
+                    先得到锁。可能造成某些线程一直拿不到锁，也就不公平。
+    
