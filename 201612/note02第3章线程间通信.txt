@@ -204,4 +204,16 @@
                     即先到先得的FIFO顺序。
         "非公平锁"：获取锁的抢占机制，是随机获得锁，先来的不一定
                     先得到锁。可能造成某些线程一直拿不到锁，也就不公平。
-    
+
+16, getHoldCount(), getQueueLength()和getWaitQueueLength(Condition condition)
+    1,  这三个方法是ReentrantLock的方法，不是Lock的方法。
+    2,  getHoldCount():查询当前线程保持此锁的次数
+    3,  getQueueLength():返回正等待获取此锁的线程估计数
+    4,  getWaitQueueLength(Condition condition)
+            返回等待此锁相关的给定条件的线程估计数。
+    5,  protected Thread getOwner()
+            返回目前拥有此锁的线程，如果此锁不被任何线程拥有，则返回null。
+    6,  protected Collection<Thread> getQueuedThreads()
+            返回一个Collection，包含可能正等待获取此锁的线程
+    7,  protected Collection<Thread> getWaitingThreads(Collection collection)
+            返回一个Collection，包含可能正在等待与此锁相关给定条件的那些线程
