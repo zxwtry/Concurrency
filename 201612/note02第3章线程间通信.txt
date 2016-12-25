@@ -281,5 +281,23 @@
         安排任务的开销是O(log(n))，其中n是同时安排的任务数。
     9,  所有的构造方法都启动计时器线程。
 
-
-        
+19, 定时器Timer的方法
+    1,  Timer() 创建一个新的计时器，不是守护线程
+    2,  Timer(boolean isDaemon) 指定相关线程是不是守护线程。
+            如果计时器用于安排重复的"维护活动"，应是守护线程。
+    3,  Timer(String name)  Timer(String name, boolean isDaemon)
+        指定相关线程的指定名称，指定相关线程是不是守护线程
+    4,  void cancel() 终止此计时器，丢弃所有当前已安排的任务。
+    5,  int purge() 从此计时器的任务队列中移除所有已取消的任务。
+    6,  void schedule(TimerTask task, Date time)
+            安排在指定的时间执行指定的任务。
+    7,  void schedule(TimerTask task, Date firsttime, long period)
+            安排在指定的任务在指定的时间开始，延迟period重复执行。
+    8,  void schedule(TimerTask task, long delay)
+            安排在指定延迟后执行指定的任务。
+    9,  void schedule(TimerTask task ,long dely, long period)
+            安排指定的任务从指定的延迟后开始进行，延迟period重复执行。
+    10, void scheduleAtFixedRate(TimerTask task, Date firstTime, long period)
+            FixedRate: 保证执行频率正好是指定周期的倒数。
+    11, void scheduleAtFixedRate(TimerTask task, long delay, long period)
+            FixedRate: 保证执行频率正好是指定周期的倒数。
